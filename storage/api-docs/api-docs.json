@@ -1,0 +1,550 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Property API Documentation",
+        "description": "API backend untuk aplikasi Property (menampilkan kategori, property, agent, dan detailnya)",
+        "contact": {
+            "name": "Property App Support",
+            "email": "support@propertyapp.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local Development Server"
+        }
+    ],
+    "paths": {
+        "/api/agents": {
+            "get": {
+                "tags": [
+                    "Agents"
+                ],
+                "summary": "Get all agents",
+                "operationId": "b5a0e7c255963f218abd63d5f5f3edda",
+                "responses": {
+                    "200": {
+                        "description": "List of agents"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Agents"
+                ],
+                "summary": "Create new agent",
+                "operationId": "366eac1f4d4c09acf87db587d56f99b0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+628123456789"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@agent.com"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "https://example.com/photo.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Agent created"
+                    }
+                }
+            }
+        },
+        "/api/agents/{id}": {
+            "get": {
+                "tags": [
+                    "Agents"
+                ],
+                "summary": "Get agent by ID",
+                "operationId": "86d8cb4ad94bc60f7b633395dfdc222d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Agent details"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Agents"
+                ],
+                "summary": "Update agent",
+                "operationId": "4503aa71a52f5252cb338e82d2007e08",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Jane Doe"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Agent updated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Agents"
+                ],
+                "summary": "Delete agent",
+                "operationId": "b861e064ab6e0bc795fcd368358c93fd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Agent deleted"
+                    }
+                }
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories",
+                "operationId": "a6252ba5b750e9377c06c5d0a0131520",
+                "responses": {
+                    "200": {
+                        "description": "List of categories"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create category",
+                "operationId": "9781761d56652cb30df6f7f27c8469d3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Rumah"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category created"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category by ID",
+                "operationId": "980bca59a195c608b6ed99664ee82cad",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category data"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update category",
+                "operationId": "b0966446cf48a359865d65a514022c76",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Apartemen"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete category",
+                "operationId": "c162736d7c7b814c0839db3191b3663e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted"
+                    }
+                }
+            }
+        },
+        "/api/properties": {
+            "get": {
+                "tags": [
+                    "Properties"
+                ],
+                "summary": "Get all properties",
+                "operationId": "c2da11bedb89c85eeb889e2283ab4d1a",
+                "responses": {
+                    "200": {
+                        "description": "List of properties"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Properties"
+                ],
+                "summary": "Create new property",
+                "operationId": "f8e23824bfd8e6dd8d38e0a0ac6b610c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "agent_id",
+                                    "title",
+                                    "price",
+                                    "whatsapp_number"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "agent_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Rumah Minimalis di Bandung"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": 250000000
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Jl. Cibiru No. 10"
+                                    },
+                                    "whatsapp_number": {
+                                        "type": "string",
+                                        "example": "+628123456789"
+                                    },
+                                    "details": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "key": {
+                                                    "type": "string",
+                                                    "example": "Kamar Tidur"
+                                                },
+                                                "value": {
+                                                    "type": "string",
+                                                    "example": "3"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Property created"
+                    }
+                }
+            }
+        },
+        "/api/properties/{id}": {
+            "get": {
+                "tags": [
+                    "Properties"
+                ],
+                "summary": "Get property by ID",
+                "operationId": "bbdccce70f13ff861e6ca681eec5b089",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Property details"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Properties"
+                ],
+                "summary": "Update property",
+                "operationId": "7f41a575138bd8273a080d8a85be1b52",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Rumah Baru Bandung"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Property updated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Properties"
+                ],
+                "summary": "Delete property",
+                "operationId": "49a43e01bc8b9e94bdfde4d37a615741",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Property deleted"
+                    }
+                }
+            }
+        },
+        "/api/go-login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login as User or Admin",
+                "description": "Authenticate user or admin by email and password. Redirects to appropriate route upon success.",
+                "operationId": "6c75ad1345ca4c42559d745f5f72cccf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "secret123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "302": {
+                        "description": "Redirects to dashboard or service page depending on role (User/Admin)"
+                    },
+                    "400": {
+                        "description": "Invalid email or password"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout current session",
+                "description": "Logs out both web and admin guards, then redirects to login route.",
+                "operationId": "84c346b5fbf89662322f7b60466d3011",
+                "responses": {
+                    "302": {
+                        "description": "Redirects to login page after logout"
+                    },
+                    "401": {
+                        "description": "Unauthenticated or session not found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Agents",
+            "description": "API for managing property agents"
+        },
+        {
+            "name": "Categories",
+            "description": "API for managing property categories"
+        },
+        {
+            "name": "Properties",
+            "description": "API for managing properties"
+        },
+        {
+            "name": "Authentication",
+            "description": "API for user and admin authentication"
+        }
+    ]
+}
